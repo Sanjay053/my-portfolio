@@ -1,0 +1,45 @@
+
+/* ✅ Link style */
+.navbar-custom a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 22px;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+/* ✅ Hover effect */
+.navbar-custom a:hover {
+  color: #6C63FF; 
+  transform: translateY(-2px);
+}
+
+/* ✅ Active route style */
+.navbar-active {
+  color: #6C63FF !important;
+  font-weight: 600;
+  border-bottom: 2px solid #6C63FF;
+}
+
+.navbar-custom {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  padding: 12px 24px;
+  transition: all 0.3s ease;
+   position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* sticky applied dynamically */
+.sticky-nav {
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  backdrop-filter: blur(10px);
+}
+
+

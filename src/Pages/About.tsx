@@ -1,128 +1,200 @@
-import { Card } from "antd";
-import { ClockCircleOutlined, CaretRightOutlined } from "@ant-design/icons";
-import { Timeline, Typography } from "antd";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import {
+  CodeOutlined,
+  BlockOutlined,
+  GatewayOutlined,
+  NodeExpandOutlined,
+  BgColorsOutlined,
+  Html5Outlined,
+  HighlightOutlined,
+  ApiOutlined,
+  GithubOutlined,
+  CodeSandboxOutlined,
+  CameraOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
+import ResumePDF from "../Asset/sanjay_resume.pdf";
 
-const { Title } = Typography;
+/* ✅ Timeline Data */
+const timeline = [
+  {
+    year: "2025 — Promotion Platform",
+    desc: "Built multi-level promo workflows using GraphQL & Tailwind.",
+  },
+  {
+    year: "2024 — Offer Management System",
+    desc: "Developed UI with Angular & Playwright.",
+  },
+  {
+    year: "2023 — Pet Service Booking",
+    desc: "Created booking UI using React.",
+  },
+  {
+    year: "2023 — Download Delight",
+    desc: "Developed UI using Angular + Material.",
+  },
+];
+
+const MotionLink = motion(Link);
 
 const AboutPage = () => {
-  return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-r from-violet-100 to-indigo-200 p-6">
-      <Card
-        title="Hi, I’m Sanjay 👋 — a passionate Frontend Developer"
-        variant="borderless"
-        style={{ margin: "40px 50px" }}
-      >
-        <p>
-          I’m a frontend developer who loves building modern, responsive, and
-          user-friendly web applications. With strong expertise in React,
-          Angular, and UI design, I aim to create digital experiences that are
-          simple yet impactful.
-        </p>
-      </Card>
+  const techStack = [
+    { icon: <CodeSandboxOutlined />, name: "React" },
+    { icon: <ApiOutlined />, name: "Angular" },
+    { icon: <CodeOutlined />, name: "TypeScript" },
+    { icon: <CodeOutlined />, name: "JavaScript" },
+    { icon: <BlockOutlined />, name: "Redux Toolkit" },
+    { icon: <GatewayOutlined />, name: "GraphQL" },
+    { icon: <NodeExpandOutlined />, name: "Node Basics" },
+    { icon: <BgColorsOutlined />, name: "Tailwind" },
+    { icon: <Html5Outlined />, name: "HTML" },
+    { icon: <HighlightOutlined />, name: "CSS" },
+    { icon: <GithubOutlined />, name: "GitHub" },
+  ];
 
-      <Card
-        title="My Journey"
-        style={{ marginLeft: "40px", maxWidth: "700px" }}
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-violet-100 to-indigo-200 px-6 py-10">
+      
+      {/* ✅ Section 1 — Intro */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-4xl mx-auto text-center"
       >
-        <Timeline
-          mode="alternate"
-          style={{ paddingLeft: "20px", maxWidth: "700px", margin: "0 auto" }}
-          items={[
-            {
-              label: <Title level={4}>Projects</Title>,
-              dot: <ClockCircleOutlined style={{ fontSize: "16px" }} />,
-              children: (
-                <div>
-                  <strong>Cost Management (E-commerce App)</strong> <br />
-                  React, GraphQL, Redux Toolkit, Tailwind <br />
-                  <em>Sep 2025 – Present</em> <br />
-                  <CaretRightOutlined /> Developed client-side features such as
-                  product management and checkout flows.
-                </div>
-              ),
-            },
-            {
-              color: "green",
-              children: (
-                <div>
-                  <strong>Offer Management System</strong> <br />
-                  Angular, Tailwind, RxJS, Ant Design, Playwright <br />
-                  <em>Jul 2025 – Present</em> <br />
-                  <CaretRightOutlined /> Built offer creation modules for
-                  vendors and merchants with automated testing.
-                </div>
-              ),
-            },
-            {
-              color: "green",
-              dot: <ClockCircleOutlined style={{ fontSize: "16px" }} />,
-              children: (
-                <div>
-                  <strong>Unified Promotions Platform</strong> <br />
-                  React, GraphQL, Redux Toolkit, Tailwind <br />
-                  <em>Sep 2024 – Jun 2025</em> <br />
-                  <CaretRightOutlined /> Designed promotion workflows at
-                  division and national levels.
-                </div>
-              ),
-            },
-            {
-              color: "green",
-              children: (
-                <div>
-                  <strong>Canine (Pet Service Booking)</strong> <br />
-                  React, Calendar Slot Booking <br />
-                  <em>Jul 2023 – Jan 2024</em> <br />
-                  <CaretRightOutlined /> Implemented slot-based booking system
-                  for pet services.
-                </div>
-              ),
-            },
-            {
-              color: "green",
-              children: (
-                <div>
-                  <strong>Download Delight (Game Listing)</strong> <br />
-                  Angular, Material, Bootstrap <br />
-                  <em>Jan 2023 – Jun 2023</em> <br />
-                  <CaretRightOutlined /> Created UI for browsing and managing
-                  downloadable games.
-                </div>
-              ),
-            },
-            {
-              color: "green",
-              label: <Title level={4}>Certifications</Title>,
-              dot: <ClockCircleOutlined style={{ fontSize: "16px" }} />,
-              children: (
-                <ul style={{ margin: 0, paddingLeft: "16px" }}>
-                  <li>
-                    Responsive Web Design (JavaScript) — Sep 2022 – Dec 2022
-                  </li>
-                  <li>
-                    Algorithms & Data Structures / ANN (IBM) — Mar 2022 - Aug
-                    2022
-                  </li>
-                  <li>
-                    Machine Learning for Real World Applications (TCS iON) — Oct
-                    2021 - Feb 2022
-                  </li>
-                </ul>
-              ),
-            },
-            {
-              label: <Title level={4}>Education</Title>,
-              color: "green",
-              children: (
-                <div>
-                  <strong>B.E. Computer Science</strong> <br />
-                  Aug 2019 – Mar 2023
-                </div>
-              ),
-            },
-          ]}
-        />
-      </Card>
+        <h1 className="text-4xl font-bold text-indigo-700">About Me</h1>
+        <p className="mt-4 text-lg text-gray-700">
+          Hi! I’m <strong>Sanjay</strong>, a passionate{" "}
+          <strong>Frontend Developer</strong> who loves creating modern,
+          intuitive & scalable web applications using React & Angular.
+        </p>
+      </motion.div>
+
+      {/* ✅ Section 2 — Journey */}
+      <motion.div
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="max-w-4xl mx-auto mt-12"
+      >
+        <h2 className="text-2xl font-semibold text-indigo-600">My Journey</h2>
+
+        <motion.ul
+          className="timeline mt-6 border-l-2 border-indigo-600 space-y-6 pl-6"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: { transition: { staggerChildren: 0.2 } },
+          }}
+        >
+          {timeline.map((item, index) => (
+            <motion.li
+              key={index}
+              variants={{
+                hidden: { opacity: 0, x: -30 },
+                visible: { opacity: 1, x: 0 },
+              }}
+              className="relative"
+            >
+              <span className="absolute -left-[13px] top-1 w-3 h-3 bg-indigo-600 rounded-full"></span>
+              <h3 className="font-bold">{item.year}</h3>
+              <p className="text-gray-700">{item.desc}</p>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </motion.div>
+
+      {/* ✅ Section 3 — Skills */}
+      <motion.div
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="max-w-4xl mx-auto mt-12"
+      >
+        <h2 className="text-2xl font-semibold text-indigo-600">
+          Skills & Tech Stack
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          {techStack.map((tech, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.1 }}
+              className="flex flex-col items-center gap-2 bg-white shadow-md p-3 rounded-xl"
+            >
+              <div className="text-3xl text-indigo-600">{tech.icon}</div>
+              <p className="font-medium">{tech.name}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ✅ Section 4 — Strengths */}
+      <div className="max-w-4xl mx-auto mt-12">
+        <h2 className="text-2xl font-semibold text-indigo-600">Strengths</h2>
+        <ul className="mt-4 list-disc ml-6 space-y-2 text-gray-700">
+          <li>Pixel-perfect UI development</li>
+          <li>Reusable & scalable components</li>
+          <li>Performance optimization</li>
+          <li>Responsive web development</li>
+        </ul>
+      </div>
+
+      {/* ✅ Section 5 — What I care about */}
+      <div className="max-w-4xl mx-auto mt-12">
+        <h2 className="text-2xl font-semibold text-indigo-600">
+          What I care about
+        </h2>
+        <ul className="mt-4 list-disc ml-6 space-y-2 text-gray-700">
+          <li>Accessible & user-centered design</li>
+          <li>Clean, maintainable code</li>
+          <li>Continuous improvement</li>
+        </ul>
+      </div>
+
+      {/* ✅ Section 6 — Experience Summary */}
+      <div className="max-w-4xl mx-auto mt-12">
+        <h2 className="text-2xl font-semibold text-indigo-600">
+          Experience Summary
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          2+ years working across enterprise UI systems — promotions, e-commerce
+          and workflow platforms. Strong in React, Angular, GraphQL, API
+          integration & scalable component libraries.
+        </p>
+      </div>
+
+      {/* ✅ Section 7 — Hobbies */}
+      <div className="max-w-4xl mx-auto mt-12">
+        <h2 className="text-2xl font-semibold text-indigo-600">Hobbies</h2>
+        <ul className="flex gap-6 flex-wrap mt-4 text-gray-700">
+          <li className="flex items-center gap-2">
+            <CameraOutlined /> Photography
+          </li>
+          <li className="flex items-center gap-2">
+            <SmileOutlined /> Dogs
+          </li>
+          <li>Anime & Tech Trends</li>
+        </ul>
+      </div>
+
+      {/* ✅ Resume + Contact */}
+      <div className="max-w-4xl mx-auto mt-12 flex gap-6">
+        <motion.a
+          href={ResumePDF}
+          download
+          whileHover={{ scale: 1.05 }}
+          className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition"
+        >
+          Download Resume
+        </motion.a>
+
+        <MotionLink
+  to="/contact"
+  whileHover={{ scale: 1.05 }}
+  className="px-6 py-3 border border-indigo-600 text-indigo-600 font-semibold rounded-md hover:bg-indigo-100 transition block text-center"
+>
+  Contact me
+</MotionLink>
+      </div>
     </div>
   );
 };
