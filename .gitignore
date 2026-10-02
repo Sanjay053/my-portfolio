@@ -4,8 +4,8 @@
 .pnp.js
 
 # → Build output (DO NOT ignore build/dist for gh-pages deploy)
-/build   <-- removed
-# /dist    <-- removed
+/build
+/dist
 /.parcel-cache
 
 # → Testing
