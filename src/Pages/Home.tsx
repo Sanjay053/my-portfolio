@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 import type { MotionProps, TargetAndTransition, Transition } from "framer-motion";
 import {
   ArrowRightOutlined,
@@ -145,15 +146,18 @@ const HomePage = () => {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-3 mt-8 sm:mt-9">
-                <motion.a
-                  href="/work"
+                <Link
+                  to="/work"
+                >
+                  <motion.div
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   className="group inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 font-medium shadow-lg shadow-indigo-500/20"
-                >
+                  >
                   Explore my work
                   <ArrowRightOutlined className="transition-transform duration-300 group-hover:translate-x-1" />
-                </motion.a>
+                  </motion.div>
+                </Link>
 
                 <motion.a
                   href="/contact"

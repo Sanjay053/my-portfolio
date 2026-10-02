@@ -15,12 +15,14 @@ import About from "./Pages/About";
 import SkillsPage from "./Pages/Skill";
 import ContactPage from "./Pages/Contact";
 import NotFound from "./Pages/NotFound";
+import ScrollToTop from "./Components/ScrollToTop"
 
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
+      <ScrollToTop />
       <Routes location={location} key={location.pathname}>
         {/* Default */}
         <Route
