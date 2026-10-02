@@ -1,0 +1,62 @@
+[
+  {
+    "name": "name",
+    "label": "Name",
+    "type": "text",
+    "placeholder": "Your name",
+    "required": true,
+    "grid": "half",
+    "validation": {
+      "minLength": 2,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z\\s.'-]+$",
+      "minLengthMessage": "Name must contain at least 2 characters",
+      "maxLengthMessage": "Name cannot exceed 50 characters",
+      "patternMessage": "Please enter a valid name"
+    }
+  },
+  {
+    "name": "email",
+    "label": "Email",
+    "type": "email",
+    "placeholder": "you@example.com",
+    "required": true,
+    "grid": "half",
+    "validation": {
+      "maxLength": 100,
+      "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "maxLengthMessage": "Email cannot exceed 100 characters",
+      "patternMessage": "Please enter a valid email address"
+    }
+  },
+  {
+    "name": "phone",
+    "label": "Phone",
+    "type": "tel",
+    "placeholder": "+91 XXXXX XXXXX",
+    "required": true,
+    "grid": "full",
+    "validation": {
+      "minLength": 10,
+      "maxLength": 15,
+      "pattern": "^[+]?[0-9\\s-]+$",
+      "minLengthMessage": "Phone number must contain at least 10 digits",
+      "maxLengthMessage": "Phone number cannot exceed 15 characters",
+      "patternMessage": "Please enter a valid phone number"
+    }
+  },
+  {
+    "name": "message",
+    "label": "Message",
+    "type": "textarea",
+    "placeholder": "Tell me about your project...",
+    "required": true,
+    "grid": "full",
+    "validation": {
+      "minLength": 10,
+      "maxLength": 1000,
+      "minLengthMessage": "Message must contain at least 10 characters",
+      "maxLengthMessage": "Message cannot exceed 1000 characters"
+    }
+  }
+]

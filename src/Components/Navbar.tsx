@@ -39,7 +39,7 @@ function NavBar({ setIsSticky }: any) {
         py={4}
       >
         <Flex alignItems="center" justifyContent="space-between">
-          <NavLink to="/" className="navbar-brand text-white">
+          <NavLink to="/" className="navbar-brand text-white" onClick={onClose}>
             Home
           </NavLink>
 
@@ -49,16 +49,14 @@ function NavBar({ setIsSticky }: any) {
             display={{ base: "none", md: "flex" }}
             className="navbar-links"
           >
-            <NavLink to="/work">Service</NavLink>
-            <NavLink to="/skill">Skills</NavLink>
-            <NavLink to="/about">About</NavLink>
+            <NavLink to="/work">Work</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </HStack>
 
           {/* Mobile Menu */}
           <IconButton
             aria-label="Open Menu"
-            onClick={onOpen}
+            onClick={isOpen ? onClose : onOpen}
             display={{ base: "flex", md: "none" }}
             color="white"
             bg="transparent"
@@ -72,18 +70,11 @@ function NavBar({ setIsSticky }: any) {
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent bg="gray.900" color="white">
-          <DrawerCloseButton />
 
           <DrawerBody mt={20}>
             <VStack gap={6} align="flex-start">
               <NavLink to="/work" onClick={onClose}>
-                Service
-              </NavLink>
-              <NavLink to="/skill" onClick={onClose}>
-                Skills
-              </NavLink>
-              <NavLink to="/about" onClick={onClose}>
-                About
+                Work
               </NavLink>
               <NavLink to="/contact" onClick={onClose}>
                 Contact
