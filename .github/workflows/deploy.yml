@@ -5,44 +5,62 @@ on:
     branches:
       - master
 
+  workflow_dispatch:
+
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Get the source code
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Setup Node
-        uses: actions/setup-node@v6
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
 
+      # 3. Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      - name: Create .env
+      # 4. Check Firebase secrets exist
+      - name: Check Firebase environment
+        env:
+          REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
+          REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
         run: |
-          echo "REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_FIREBASE_API_KEY }}" >> .env
-          echo "REACT_APP_FIREBASE_AUTH_DOMAIN=${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}" >> .env
-          echo "REACT_APP_FIREBASE_PROJECT_ID=${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}" >> .env
-          echo "REACT_APP_FIREBASE_STORAGE_BUCKET=${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}" >> .env
-          echo "REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}" >> .env
-          echo "REACT_APP_FIREBASE_APP_ID=${{ secrets.REACT_APP_FIREBASE_APP_ID }}" >> .env
+          test -n "$REACT_APP_FIREBASE_API_KEY" || exit 1
+          test -n "$REACT_APP_FIREBASE_PROJECT_ID" || exit 1
+          echo "Firebase environment variables are available"
 
+      # 5. Build React app using Firebase secrets
       - name: Build React app
+        env:
+          REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
+          REACT_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}
+          REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
+          REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
+          REACT_APP_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}
+          REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID }}
         run: npm run build
 
+      # 6. Configure GitHub Pages
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload build
+      # 7. Upload CRA build folder
+      - name: Upload build artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./build
@@ -51,15 +69,17 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
 
+    permissions:
+      pages: write
+      id-token: write
+      actions: read
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    permissions:
-      pages: write
-      id-token: write
-
     steps:
-      - name: Deploy
+      # 8. Deploy uploaded artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
